@@ -4,6 +4,8 @@ from django.views.decorators import gzip
 from django.shortcuts import render
 
 # Create a cascade classifier for detecting faces
+from matplotlib.pyplot import gray
+
 face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
 
 # Function to capture video from the default camera and detect faces
@@ -41,11 +43,17 @@ def webcam_feed1(request):
 def webcam_feed2(request):
     return StreamingHttpResponse(detect_handes(), content_type='multipart/x-mixed-replace; boundary=frame')
 
+@gzip.gzip_page
+def webcam_feed3(request):
+    return StreamingHttpResponse(detect_smile(), content_type='multipart/x-mixed-replace; boundary=frame')
+
 # Function to render the index.html template
 def index(request):
     return render(request, 'Detection/index.html')
 def hand(request):
     return render(request, 'Detection/index_.html')
+def smily(request):
+    return render(request, 'Detection/index__.html')
 
 
 import cv2
@@ -90,6 +98,11 @@ def detect_handes():
         pTime = cTime
 
         cv2.putText(img,str(int(fps)), (10,70), cv2.FONT_HERSHEY_PLAIN, 3, (255,0,255), 3)
-
+            #to add it here
         cv2.imshow("Image", img)
         cv2.waitKey(1)
+
+
+
+
+
