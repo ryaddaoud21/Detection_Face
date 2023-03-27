@@ -98,11 +98,10 @@ def detect_handes():
         pTime = cTime
 
         cv2.putText(img,str(int(fps)), (10,70), cv2.FONT_HERSHEY_PLAIN, 3, (255,0,255), 3)
-            #to add it here
+            #to add it heregot
+
+
         cv2.imshow("Image", img)
         cv2.waitKey(1)
-
-
-
 
 
